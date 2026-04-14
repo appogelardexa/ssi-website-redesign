@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSI Website — Design Templates</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue:      #0E50A0;
+  --blue-dark: #0A3D7A;
+  --blue-deep: #061830;
+  --orange:    #F26020;
+  --orange-dk: #D44F12;
+  --white:     #FFFFFF;
+  --off:       #F6F8FC;
+  --g100:      #EEF1F8;
+  --g200:      #DDE2EF;
+  --g400:      #9AAAC4;
+  --g600:      #5A6E8A;
+  --text:      #0D1B35;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--off); color: var(--text); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+
+/* ── HEADER ── */
+.header {
+  background: var(--blue-deep);
+  padding: 48px 60px 56px;
+  position: relative; overflow: hidden;
+  border-bottom: 3px solid var(--orange);
+}
+.header-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.header-inner { position: relative; z-index: 2; max-width: 1300px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+.header-logo img { height: 52px; filter: brightness(0) invert(1); opacity: 0.9; }
+.header-title { text-align: center; }
+.header-title h1 { font-size: 1rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.9); margin-bottom: 4px; }
+.header-title p { font-size: 0.75rem; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; }
+.header-badge { background: var(--orange); color: white; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 8px 18px; border-radius: 100px; }
+
+/* ── INTRO ── */
+.intro { max-width: 1300px; margin: 0 auto; padding: 48px 60px 32px; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+.intro-left h2 { font-size: 1.5rem; font-weight: 300; letter-spacing: -0.03em; color: var(--text); }
+.intro-left h2 strong { font-weight: 700; color: var(--blue); }
+.intro-left p { font-size: 0.88rem; color: var(--g600); margin-top: 6px; line-height: 1.7; }
+.intro-tags { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; padding: 6px 14px; border-radius: 100px; border: 1.5px solid var(--g200); color: var(--g600); }
+.tag.active { background: var(--blue); border-color: var(--blue); color: white; }
+
+/* ── SECTION LABELS ── */
+.set-label { max-width: 1300px; margin: 0 auto; padding: 8px 60px 16px; display: flex; align-items: center; gap: 1rem; }
+.set-label-text { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); white-space: nowrap; }
+.set-label-line { flex: 1; height: 1px; background: var(--g200); }
+.set-label-count { font-size: 0.68rem; font-weight: 600; color: var(--g400); }
+
+/* ── GRID ── */
+.grid { max-width: 1300px; margin: 0 auto; padding: 0 60px 40px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.25rem; }
+
+/* ── CARD ── */
+.card { background: var(--white); border: 1px solid var(--g200); border-radius: 10px; overflow: hidden; transition: all 0.3s; display: flex; flex-direction: column; cursor: pointer; }
+.card:hover { border-color: var(--blue); box-shadow: 0 16px 48px rgba(14,80,160,0.12); transform: translateY(-5px); }
+.card-preview {
+  height: 160px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.card-preview-num { position: absolute; top: 12px; left: 14px; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; color: rgba(255,255,255,0.6); z-index: 2; }
+.card-preview-badge { position: absolute; top: 10px; right: 10px; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 100px; z-index: 2; }
+.card-preview-badge.new { background: var(--orange); color: white; }
+.card-preview-badge.v2 { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.2); }
+/* Template colour palettes for preview thumbnails */
+.preview-1  { background: linear-gradient(160deg, #040D20 0%, #081630 60%, #0A1F3D 100%); }
+.preview-2  { background: linear-gradient(160deg, #071D4A 0%, #0B2B6B 60%, #1A3D7F 100%); }
+.preview-3  { background: linear-gradient(160deg, #0A0A0A 0%, #111111 50%, #1a1a1a 100%); }
+.preview-4  { background: linear-gradient(160deg, #F8FAFC 0%, #EEF2F7 100%); }
+.preview-5  { background: linear-gradient(160deg, #0C2340 0%, #163556 60%, #1E4A73 100%); }
+.preview-6  { background: linear-gradient(160deg, #FFFFFF 0%, #F0F2F7 100%); }
+.preview-7  { background: linear-gradient(160deg, #06142A 0%, #0A3D7A 50%, #0E50A0 100%); }
+.preview-8  { background: linear-gradient(160deg, #071C3A 0%, #0E50A0 60%, #1A62B8 100%); }
+.preview-9  { background: linear-gradient(160deg, #040D20 0%, #0E50A0 50%, #0A3D7A 100%); }
+.preview-10 { background: linear-gradient(160deg, #05152E 0%, #0A3D7A 50%, #0E50A0 100%); }
+
+/* Mockup lines inside preview */
+.mock { width: 80%; position: relative; z-index: 2; }
+.mock-nav { height: 8px; background: rgba(255,255,255,0.12); border-radius: 2px; margin-bottom: 14px; }
+.mock-h1 { height: 14px; background: rgba(255,255,255,0.85); border-radius: 2px; margin-bottom: 6px; width: 70%; }
+.mock-h2 { height: 10px; background: rgba(255,255,255,0.5); border-radius: 2px; margin-bottom: 14px; width: 50%; }
+.mock-p { height: 6px; background: rgba(255,255,255,0.22); border-radius: 1px; margin-bottom: 4px; }
+.mock-p.short { width: 60%; }
+.mock-btn { height: 14px; width: 80px; border-radius: 3px; margin-top: 10px; }
+.mock-btn.orange { background: var(--orange); }
+.mock-btn.white { background: rgba(255,255,255,0.85); }
+/* Light preview mockups */
+.preview-4 .mock-nav,
+.preview-6 .mock-nav { background: rgba(14,80,160,0.12); }
+.preview-4 .mock-h1,
+.preview-6 .mock-h1 { background: var(--blue); opacity: 0.85; }
+.preview-4 .mock-h2,
+.preview-6 .mock-h2 { background: var(--g400); opacity: 0.6; }
+.preview-4 .mock-p,
+.preview-6 .mock-p { background: var(--g200); }
+
+/* Orange accent bar on preview */
+.card-preview::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--orange); opacity: 0; transition: opacity 0.3s; }
+.card:hover .card-preview::after { opacity: 1; }
+
+/* Card body */
+.card-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+.card-name { font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 4px; line-height: 1.3; }
+.card-desc { font-size: 0.72rem; color: var(--g600); line-height: 1.6; margin-bottom: 1rem; flex: 1; }
+.card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.card-tag { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 100px; background: var(--g100); color: var(--g600); }
+.card-tag.video { background: rgba(242,96,32,0.1); color: var(--orange); }
+.card-tag.posts { background: rgba(14,80,160,0.08); color: var(--blue); }
+.card-footer { display: flex; gap: 0.5rem; }
+.btn-preview {
+  flex: 1; background: var(--blue); color: white;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 10px; border-radius: 5px; text-decoration: none; text-align: center;
+  transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 5px;
+}
+.btn-preview:hover { background: var(--blue-dark); }
+.btn-preview::after { content: '↗'; font-size: 0.75rem; }
+.btn-new-tab {
+  background: var(--g100); color: var(--g600); border: none;
+  font-size: 0.68rem; font-weight: 600; padding: 10px 12px; border-radius: 5px;
+  cursor: pointer; transition: background 0.2s; font-family: 'Inter', sans-serif;
+  text-decoration: none; display: flex; align-items: center;
+}
+.btn-new-tab:hover { background: var(--g200); }
+
+/* ── FOOTER ── */
+.footer { background: var(--blue-deep); padding: 32px 60px; margin-top: 40px; display: flex; align-items: center; justify-content: space-between; }
+.footer p { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a { font-size: 0.72rem; color: rgba(255,255,255,0.35); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+.footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+/* Responsive */
+@media (max-width: 1200px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); padding: 0 24px 40px; } .header { padding: 32px 24px 40px; } .intro { padding: 32px 24px; } .set-label { padding: 8px 24px 16px; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-grid"></div>
+  <div class="header-inner">
+    <div class="header-logo">
+      <img src="../brand_assets/survival-systems-international-logo-2.gif" alt="Survival Systems International">
+    </div>
+    <div class="header-title">
+      <h1>SSI Website Redesign — Design Templates</h1>
+      <p>Select a template to preview · Survival Systems International</p>
+    </div>
+    <div class="header-badge">10 Designs</div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  <div class="intro-left">
+    <h2>Choose Your <strong>Design Direction</strong></h2>
+    <p>10 fully designed homepage templates — open any to preview in your browser.</p>
+  </div>
+  <div class="intro-tags">
+    <span class="tag active">All (10)</span>
+    <span class="tag">With Video</span>
+    <span class="tag">Dark</span>
+    <span class="tag">Light</span>
+    <span class="tag">With Brand Assets</span>
+  </div>
+</div>
+
+<!-- SET A -->
+<div class="set-label">
+  <span class="set-label-text">Set A — Original Concepts</span>
+  <div class="set-label-line"></div>
+  <span class="set-label-count">Templates 01 – 05</span>
+</div>
+
+<div class="grid">
+
+  <!-- T1 -->
+  <div class="card" onclick="window.open('template-1-dark-premium.html','_blank')">
+    <div class="card-preview preview-1">
+      <span class="card-preview-num">01</span>
+      <div class="mock">
+        <div class="mock-nav"></div>
+        <div class="mock-h1"></div>
+        <div class="mock-h2"></div>
+        <div class="mock-p"></div>
+        <div class="mock-p short"></div>
+        <div class="mock-btn orange"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Dark Premium</div>
+      <div class="card-desc">Dark navy dominant with gold accents. Ultra-premium, luxury brand positioning.</div>
+      <div class="card-tags">
+        <span class="card-tag">Dark</span>
+        <span class="card-tag">Gold Accent</span>
+        <span class="card-tag">Premium</span>
+      </div>
+      <div class="card-footer">
+        <a href="template-1-dark-premium.html" target="_blank" class="btn-preview">Preview</a>
+        <a href="template-1-dark-premium.html" target="_blank" class="btn-new-tab" title="Open in new tab">⤢</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- T2 -->
+  <div class="card" onclick="window.open('template-2-corporate-authority.html','_blank')">
+    <div class="card-preview preview-2">
+      <span class="card-preview-num">02</span>
+      <div class="mock">
+        <div class="mock-nav"></div>
+        <div class="mock-h1"></div>
+        <div class="mock-h2"></div>
+        <div class="mock-p"></div>
+        <div class="mock-p short"></div>
+        <div class="mock-btn white"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Corporate Authority</div>
+      <div class="card-desc">Clean white and navy. Structured and professional. Maximum trust and credibility.</div>
+      <div class="card-tags">
+        <span class="card-tag">Corporate</span>
+        <span class="card-tag">Trust</span>
+        <span class="card-tag">Structured</span>
+      </div>
+      <div class="card-footer">
+        <a href="template-2-corporate-authority.html" target="_blank" class="btn-preview">Preview</a>
+        <a href="template-2-corporate-authority.html" target="_blank" class="btn-new-tab" title="Open in new tab">⤢</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- T3 -->
+  <div class="card" onclick="window.open('template-3-bold-industrial.html','_blank')">
+    <div class="card-preview preview-3">
+      <span class="card-preview-num">03</span>
+      <div class="mock">
+        <div class="mock-nav"></div>
+        <div class="mock-h1" style="width:90%;height:18px"></div>
+        <div class="mock-h2" style="width:60%;height:14px"></div>
+        <div class="mock-p"></div>
+        <div class="mock-btn orange"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Bold Industrial</div>
+      <div class="card-desc">Black and orange dominant with heavy condensed type. Powerful industrial impact.</div>
+      <div class="card-tags">
+        <span class="card-tag">Bold</span>
+        <span class="card-tag">Industrial</span>
+        <span class="card-tag">Scrolling Marquee</span>
+      </div>
+      <div class="card-footer">
+        <a href="template-3-bold-industrial.html" target="_blank" class="btn-preview">Preview</a>
+        <a href="template-3-bold-industrial.html" target="_blank" class="btn-new-tab" title="Open in new tab">⤢</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- T4 -->
+  <div class="card" onclick="window.open('template-4-modern-minimal.html','_blank')">
+    <div class="card-preview preview-4">
+      <span class="card-preview-num" style="color:rgba(14,80,160,0.4)">04</span>
+      <div class="mock">
+        <div class="mock-nav"></div>
+        <div class="mock-h1"></div>
+        <div class="mock-h2"></div>
+        <div class="mock-p"></div>
+        <div class="mock-p short"></div>
+        <div class="mock-btn orange"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Modern Minimal</div>
+      <div class="card-desc">Light, spacious, and contemporary. Clean design for a modern tech-forward audience.</div>
+      <div class="card-tags">
+        <span class="card-tag">Light</span>
+        <span class="card-tag">Minimal</span>
+        <span class="card-tag">Modern</span>
+      </div>
+      <div class="card-footer">
+        <a href="template-4-modern-minimal.html" target="_blank" class="btn-preview">Preview</a>
+        <a href="template-4-modern-minimal.html" target="_blank" class="btn-new-tab" title="Open in new tab">⤢</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- T5 -->
+  <div class="card" onclick="window.open('template-5-maritime-heritage.html','_blank')">
+    <div class="card-preview preview-5">
+      <span class="card-preview-num">05</span>
+      <div class="mock">
+        <div class="mock-nav"></div>
+        <div class="mock-h1" style="width:80%"></div>
+        <div class="mock-h1" style="width:60%;background:var(--orange);opacity:0.8"></div>
+        <div class="mock-p"></div>
+        <div class="mock-p short"></div>
+        <div class="mock-btn orange"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Maritime Heritage</div>
+      <div class="card-desc">Classic nautical feel with serif headings. Authority through history and legacy.</div>
+      <div class="card-tags">
+        <span class="card-tag">Heritage</span>
+        <span class="card-tag">Serif</span>
+        <span class="card-tag">Classic</span>
+      </div>
+      <div class="card-footer">
+        <a href="template-5-maritime-heritage.html" target="_blank" class="btn-preview">Preview</a>
+        <a href="template-5-maritime-heritage.html" target="_blank" class="btn-new-tab" title="Open in new tab">⤢</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SET B -->
+<div class="set-label">
+  <span class="set-label-text">Set B — Brand Asset Redesigns</span>
+  <div class="set-label-line"></div>
+  <span class="set-label-count">Templates 06 – 10</span>
+</div>
+
+<div class="grid">
+
+  <!-- T6 -->
+  <div class="card" onclick="window.open('template-1-clean-white.html','_blank')">
+    <div class="card-preview preview-6">
+      <span class="card-preview-num" style="color:rgba(14,80,160,0.35)">06</span>
+      <span class="card-preview-badge new">Video + Posts</span>
+      <div class="mock">
+        <div class="mock-nav"></div>
+        <div class="mock-h1"></div>
+        <div class="mock-h2"></div>
+        <div class="mock-p"></div>
+        <div class="mock-p short"></div>
+        <div class="mock-btn orange"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Clean White</div>
+      <div class="card-desc">Apple-clean white with SSI brand colors. Spacious split hero with video panel on right.</div>
+      <div class="card-tags">
+        <span class="card-tag video">Video</span>
+        <span class="card-tag posts">Recent Posts</span>
+        <span class="card-tag">Light</span>
+        <span class="card-tag">Split Hero</span>
+      </div>
+      <div class="card-footer">
+        <a href="template-1-clean-white.html" target="_blank" class="btn-preview">Preview</a>
+        <a href="template-1-clean-white.html" target="_blank" class="btn-new-tab" title="Open in new tab">⤢</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- T7 -->
+  <div class="card" onclick="window.open('template-2-navy-premium.html','_blank')">
+    <div class="card-preview preview-7">
+      <span class="card-preview-num">07</span>
+      <span class="card-preview-badge new">Video + Posts</span>
+      <div class="mock">
+        <div class="mock-nav"></div>
+        <div class="mock-h1"></div>
+        <div class="mock-h2"></div>
+        <div class="mock-p"></div>
+        <div class="mock-p short"></div>
+        <div class="mock-btn white"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Navy Premium</div>
+      <div class="card-desc">Deep navy full-bleed hero with video background. Feature cards on the right, authoritative.</div>
+      <div class="card-tags">
+        <span class="card-tag video">Video BG</span>
+        <span class="card-tag posts">Recent Posts</span>
+        <span class="card-tag">Dark</span>
+        <span class="card-tag">Authority</span>
+      </div>
+      <div class="card-footer">
+        <a href="template-2-navy-premium.html" target="_blank" class="btn-preview">Preview</a>
+        <a href="template-2-navy-premium.html" target="_blank" class="btn-new-tab" title="Open in new tab">⤢</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- T8 -->
+  <div class="card" onclick="window.open('template-3-split-elegant.html','_blank')">
+    <div class="card-preview preview-8">
+      <span class="card-preview-num">08</span>
+      <span class="card-preview-badge v2">Brand Assets</span>
+      <div class="mock">
+        <div class="mock-nav" style="background:rgba(255,255,255,0.08)"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:8px">
+          <div>
+            <div class="mock-h1" style="width:100%;margin-bottom:5px"></div>
+            <div class="mock-h2" style="width:80%"></div>
+            <div class="mock-p" style="margin-top:8px"></div>
+            <div class="mock-btn orange" style="margin-top:8px;width:60px;height:10px"></div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border-radius:3px;display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:4px">
+            <div style="background:rgba(255,255,255,0.08);border-radius:2px"></div>
+            <div style="background:rgba(255,255,255,0.08);border-radius:2px"></div>
+            <div style="background:rgba(255,255,255,0.08);border-radius:2px"></div>
+            <div style="background:rgba(255,255,255,0.08);border-radius:2px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Split Elegant</div>
+      <div class="card-desc">50/50 split hero — dark text left, visual feature cards right. Balanced and structured.</div>
+      <div class="card-tags">
+        <span class="card-tag">Split Hero</span>
+        <span class="card-tag">Dark</span>
+        <span class="card-tag">Elegant</span>
+      </div>
+      <div class="card-footer">
+        <a href="template-3-split-elegant.html" target="_blank" class="btn-preview">Preview</a>
+        <a href="template-3-split-elegant.html" target="_blank" class="btn-new-tab" title="Open in new tab">⤢</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- T9 -->
+  <div class="card" onclick="window.open('template-4-editorial.html','_blank')">
+    <div class="card-preview preview-9">
+      <span class="card-preview-num">09</span>
+      <span class="card-preview-badge v2">Brand Assets</span>
+      <div class="mock">
+        <div class="mock-nav"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:end;margin-bottom:8px">
+          <div class="mock-h1" style="width:100%;height:22px;margin:0"></div>
+          <div style="padding-top:10px">
+            <div class="mock-p"></div>
+            <div class="mock-p short"></div>
+            <div class="mock-btn orange" style="margin-top:8px;width:60px;height:10px"></div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:3px;height:28px">
+          <div style="background:rgba(255,255,255,0.1);border-radius:2px"></div>
+          <div style="background:rgba(255,255,255,0.07);border-radius:2px"></div>
+          <div style="background:rgba(255,255,255,0.07);border-radius:2px"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Editorial</div>
+      <div class="card-desc">Magazine-style large type hero with photo row beneath. Consultancy / editorial feel.</div>
+      <div class="card-tags">
+        <span class="card-tag">Editorial</span>
+        <span class="card-tag">Large Type</span>
+        <span class="card-tag">Magazine</span>
+      </div>
+      <div class="card-footer">
+        <a href="template-4-editorial.html" target="_blank" class="btn-preview">Preview</a>
+        <a href="template-4-editorial.html" target="_blank" class="btn-new-tab" title="Open in new tab">⤢</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- T10 -->
+  <div class="card" onclick="window.open('template-5-luxury-minimal.html','_blank')">
+    <div class="card-preview preview-10">
+      <span class="card-preview-num">10</span>
+      <span class="card-preview-badge new">Video + Posts</span>
+      <div class="mock">
+        <div class="mock-nav"></div>
+        <div class="mock-h1" style="height:20px;width:90%"></div>
+        <div class="mock-h1" style="height:20px;width:70%;background:var(--orange);opacity:0.8"></div>
+        <div class="mock-h1" style="height:20px;width:55%"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px">
+          <div>
+            <div class="mock-p"></div>
+            <div class="mock-p short"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">
+            <div class="mock-btn white" style="width:70px;height:10px;margin:0"></div>
+            <div class="mock-btn" style="width:70px;height:10px;margin:0;background:rgba(255,255,255,0.2)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-name">Luxury Minimal</div>
+      <div class="card-desc">Ultra-premium full-bleed video hero. Giant type, restrained layout. Most cinematic.</div>
+      <div class="card-tags">
+        <span class="card-tag video">Video BG</span>
+        <span class="card-tag posts">Recent Posts</span>
+        <span class="card-tag">Luxury</span>
+        <span class="card-tag">Full Bleed</span>
+      </div>
+      <div class="card-footer">
+        <a href="template-5-luxury-minimal.html" target="_blank" class="btn-preview">Preview</a>
+        <a href="template-5-luxury-minimal.html" target="_blank" class="btn-new-tab" title="Open in new tab">⤢</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>SSI Website Redesign Project · 10 Design Templates · © 2025 Survival Systems International</p>
+  <div class="footer-links">
+    <a href="#">Set A (01–05)</a>
+    <a href="#">Set B (06–10)</a>
+    <a href="#">Brand Assets</a>
+  </div>
+</div>
+
+</body>
+</html>

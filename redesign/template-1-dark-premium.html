@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSI — Template 1: Dark Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Barlow:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #040D20;
+    --navy-mid: #081630;
+    --navy-light: #0D2147;
+    --gold: #C9883A;
+    --gold-light: #E8A84A;
+    --white: #FFFFFF;
+    --off-white: #F0F2F5;
+    --text-dim: rgba(255,255,255,0.55);
+    --border: rgba(255,255,255,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--white); -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(4,13,32,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+  .logo {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 800; font-size: 1.2rem;
+    letter-spacing: 0.05em;
+    color: white;
+  }
+  .logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-dim); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-phone {
+    font-size: 0.85rem; font-weight: 600;
+    color: var(--gold); letter-spacing: 0.05em;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 50%, #0A1F3D 100%);
+    display: flex; align-items: center;
+    padding: 120px 60px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 60%; height: 100%;
+    background: url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=1200') center/cover;
+    opacity: 0.12;
+    mask-image: linear-gradient(to left, rgba(0,0,0,0.8), transparent);
+  }
+  .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(201,136,58,0.12);
+    border: 1px solid rgba(201,136,58,0.3);
+    padding: 8px 18px; border-radius: 100px;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2rem;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+  .hero h1 {
+    font-family: 'Barlow', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900; line-height: 1.0;
+    letter-spacing: -0.03em;
+    max-width: 700px; margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: normal; color: var(--gold); }
+  .hero p {
+    font-size: 1.15rem; color: var(--text-dim);
+    max-width: 520px; line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; margin-bottom: 5rem; }
+  .btn-gold {
+    background: var(--gold); color: var(--navy);
+    font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 16px 36px; border-radius: 4px;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201,136,58,0.3); }
+  .btn-ghost {
+    color: rgba(255,255,255,0.7);
+    font-weight: 600; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 16px 36px; border-radius: 4px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: white; }
+  .hero-stats { display: flex; gap: 4rem; padding-top: 3rem; border-top: 1px solid var(--border); }
+  .stat .num {
+    font-family: 'Barlow', sans-serif;
+    font-size: 2.5rem; font-weight: 900;
+    color: var(--gold); line-height: 1; display: block;
+    margin-bottom: 4px;
+  }
+  .stat .lbl { font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 60px;
+    display: flex; align-items: center; justify-content: center; gap: 4rem;
+  }
+  .trust-item {
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-dim);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .trust-item::before { content: '✓'; color: var(--gold); font-size: 1rem; }
+
+  /* PRODUCTS */
+  .products { padding: 120px 60px; max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px; display: block;
+  }
+  .section-title {
+    font-family: 'Barlow', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800; color: white;
+    margin-bottom: 3rem; line-height: 1.1;
+  }
+  .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5px; }
+  .product-item {
+    background: var(--navy-light);
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+    cursor: pointer;
+  }
+  .product-item::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .product-item:hover { background: rgba(201,136,58,0.06); transform: translateY(-4px); }
+  .product-item:hover::after { transform: scaleX(1); }
+  .product-number { font-size: 0.7rem; font-weight: 700; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 1.5rem; display: block; }
+  .product-item h3 { font-family: 'Barlow', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .product-item p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 1.5rem; }
+  .product-link { font-size: 0.78rem; font-weight: 600; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
+
+  /* WHY US */
+  .why { background: var(--navy-mid); padding: 120px 60px; }
+  .why-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .why-left .section-title { color: white; }
+  .why-left p { color: var(--text-dim); line-height: 1.8; margin-bottom: 2rem; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .why-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.5rem;
+    transition: border-color 0.3s;
+  }
+  .why-card:hover { border-color: rgba(201,136,58,0.4); }
+  .why-card h4 { font-family: 'Barlow', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .why-card p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; margin: 0; }
+
+  /* CTA */
+  .cta {
+    padding: 120px 60px; text-align: center;
+    background: linear-gradient(135deg, var(--navy) 0%, #0A1428 100%);
+    position: relative; overflow: hidden;
+  }
+  .cta::before {
+    content: '50+';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: 'Barlow', sans-serif; font-size: 20rem; font-weight: 900;
+    color: rgba(255,255,255,0.015); letter-spacing: -0.05em;
+    pointer-events: none; white-space: nowrap;
+  }
+  .cta-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 2; }
+  .cta h2 { font-family: 'Barlow', sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; margin-bottom: 1rem; line-height: 1.1; }
+  .cta p { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 2.5rem; line-height: 1.8; }
+
+  /* FOOTER */
+  footer {
+    background: #020810;
+    border-top: 1px solid var(--border);
+    padding: 80px 60px 40px;
+  }
+  .footer-top { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); }
+  .footer-brand p { color: var(--text-dim); font-size: 0.88rem; line-height: 1.8; margin-top: 1rem; max-width: 280px; }
+  .footer-col h5 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+  .footer-col a { display: block; color: var(--text-dim); text-decoration: none; font-size: 0.88rem; margin-bottom: 0.75rem; transition: color 0.2s; }
+  .footer-col a:hover { color: white; }
+  .footer-bottom { max-width: 1200px; margin: 2rem auto 0; display: flex; justify-content: space-between; align-items: center; }
+  .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    background: rgba(201,136,58,0.1);
+    border: 1px solid rgba(201,136,58,0.25);
+    color: var(--gold);
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-top: 0.5rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">SURVIVAL SYSTEMS <span>INT'L</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="nav-phone">+44 (0) 1493 650400</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">UK's Most Trusted Lifeboat Partner</div>
+    <h1>Keeping Lifeboats<br><em>Operational.</em><br>Safe. Compliant.</h1>
+    <p>Over 50 years of specialist lifeboat inspection, maintenance, and repair — through a global network of owned and operated service bases.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-gold">Request a Survey</a>
+      <a href="#" class="btn-ghost">View Products</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="num">50+</span><span class="lbl">Years Experience</span></div>
+      <div class="stat"><span class="num">1,000+</span><span class="lbl">Vessels Serviced</span></div>
+      <div class="stat"><span class="num">Global</span><span class="lbl">Service Network</span></div>
+      <div class="stat"><span class="num">ISO</span><span class="lbl">Certified & Compliant</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">IMO MSC.402(96) Compliant</div>
+  <div class="trust-item">ISO Safety Standards</div>
+  <div class="trust-item">Patented Triple5LX Hook</div>
+  <div class="trust-item">24/7 Global Support</div>
+  <div class="trust-item">Single Fall Capsule Designers</div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products">
+  <span class="section-label">Our Products</span>
+  <h2 class="section-title">Lifeboat Systems Built<br>for the Harshest Conditions</h2>
+  <div class="products-grid">
+    <div class="product-item">
+      <span class="product-number">01</span>
+      <h3>Single Fall Lifeboat Capsules</h3>
+      <p>The most robust single fall lifeboat solution in the industry, designed and manufactured by SSI.</p>
+      <a href="#" class="product-link">Learn More →</a>
+    </div>
+    <div class="product-item">
+      <span class="product-number">02</span>
+      <h3>Twinfalt Lifeboats</h3>
+      <p>Twin-fall lifeboat solutions for vessels requiring the highest standards of safety and reliability.</p>
+      <a href="#" class="product-link">Learn More →</a>
+    </div>
+    <div class="product-item">
+      <span class="product-number">03</span>
+      <h3>Triple5LX Hook System</h3>
+      <p>Our patented hook — the safest in the industry. Certified to the latest international safety standards.</p>
+      <a href="#" class="product-link">Learn More →</a>
+    </div>
+    <div class="product-item">
+      <span class="product-number">04</span>
+      <h3>Enhanced Safety Kits</h3>
+      <p>Retrofit safety kits to bring ageing lifeboat systems up to current compliance requirements.</p>
+      <a href="#" class="product-link">Learn More →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="why-inner">
+    <div class="why-left">
+      <span class="section-label">Why SSI</span>
+      <h2 class="section-title">The Standard Others<br>Are Measured Against</h2>
+      <p>Since 1970, we've focused exclusively on lifeboat systems. That singular focus means every product, every service, every engineer — is optimised for one thing: keeping your crew safe.</p>
+      <a href="#" class="btn-gold">Work With SSI</a>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <h4>50+ Years Experience</h4>
+        <p>The safest lifeboat track record in the life saving industry.</p>
+        <span class="badge">Industry Leader</span>
+      </div>
+      <div class="why-card">
+        <h4>Worldwide Services</h4>
+        <p>Full fleet management from inspections and repairs to training.</p>
+        <span class="badge">Global Network</span>
+      </div>
+      <div class="why-card">
+        <h4>Patented Hook Design</h4>
+        <p>The Triple5LX — inherently safe by design, certified worldwide.</p>
+        <span class="badge">Patent Protected</span>
+      </div>
+      <div class="why-card">
+        <h4>ISO Compliant</h4>
+        <p>We lead the development of international ISO standards for lifeboat servicing.</p>
+        <span class="badge">ISO Certified</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-inner">
+    <span class="section-label">Get In Touch</span>
+    <h2>Is Your Fleet Inspection-Ready?</h2>
+    <p>Non-compliance, downtime, and vessel detention are risks no fleet operator can afford. Talk to SSI today.</p>
+    <a href="#" class="btn-gold">Request a Survey</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">SURVIVAL SYSTEMS <span style="color:var(--gold)">INT'L</span></div>
+      <p>The UK's most trusted lifeboat inspection and maintenance partner. Keeping crews safe since 1970.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Products</h5>
+      <a href="#">Single Fall Capsules</a>
+      <a href="#">Twinfalt Lifeboats</a>
+      <a href="#">Triple5LX Hook</a>
+      <a href="#">Safety Kits</a>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <a href="#">Maintenance & Inspection</a>
+      <a href="#">Repairs & Refurbishment</a>
+      <a href="#">Load Testing</a>
+      <a href="#">Hire Equipment</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#">About SSI</a>
+      <a href="#">Careers</a>
+      <a href="#">Blog</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Survival Systems International, Inc. All rights reserved.</p>
+    <p>+44 (0) 1493 650400 · info@ssisa.net</p>
+  </div>
+</footer>
+
+</body>
+</html>

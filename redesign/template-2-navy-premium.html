@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Survival Systems International — Template 2: Navy Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue:      #0E50A0;
+  --blue-dark: #0A3D7A;
+  --blue-deep: #061E40;
+  --orange:    #F26020;
+  --orange-dk: #D44F12;
+  --white:     #FFFFFF;
+  --gray-100:  #F0F2F7;
+  --gray-200:  #E0E4EE;
+  --gray-500:  #6B7A99;
+  --text:      #0D1B35;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+nav { background: var(--blue-deep); padding: 0 72px; display: flex; align-items: center; justify-content: space-between; height: 76px; position: sticky; top: 0; z-index: 100; }
+.logo img { height: 48px; filter: brightness(0) invert(1); opacity: 0.92; }
+.nav-center { display: flex; align-items: center; gap: 0; list-style: none; }
+.nav-center a { font-size: 0.76rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); text-decoration: none; padding: 0 18px; height: 76px; display: flex; align-items: center; transition: color 0.2s; border-bottom: 2px solid transparent; }
+.nav-center a:hover { color: rgba(255,255,255,0.9); border-bottom-color: var(--orange); }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+.nav-phone { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.55); }
+.btn-nav { background: var(--orange); color: white; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 11px 22px; border-radius: 4px; text-decoration: none; transition: background 0.2s; }
+.btn-nav:hover { background: var(--orange-dk); }
+
+/* HERO */
+.hero { background: var(--blue-deep); min-height: 88vh; display: flex; align-items: center; padding: 100px 72px; position: relative; overflow: hidden; }
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(6,24,48,0.90) 0%, rgba(14,80,160,0.55) 60%, rgba(6,24,48,0.80) 100%); z-index: 1; }
+/* Watch Our Story */
+.btn-watch { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; padding: 11px 18px; border-radius: 100px; cursor: pointer; transition: all 0.25s; font-family: 'Inter', sans-serif; }
+.btn-watch:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.4); color: white; }
+.btn-watch-icon { width: 28px; height: 28px; background: var(--orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.btn-watch-icon::after { content: ''; border-left: 9px solid white; border-top: 5px solid transparent; border-bottom: 5px solid transparent; margin-left: 2px; }
+/* Modal */
+.modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 9999; align-items: center; justify-content: center; }
+.modal.open { display: flex; }
+.modal-box { position: relative; width: 92%; max-width: 1080px; }
+.modal-box video { width: 100%; display: block; border-radius: 6px; }
+.modal-close { position: absolute; top: -44px; right: 0; background: none; border: none; color: rgba(255,255,255,0.7); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif; transition: color 0.2s; }
+.modal-close:hover { color: white; }
+/* Recent Posts */
+.posts { background: var(--off-white); padding: 100px 72px; }
+.posts-inner { max-width: 1200px; margin: 0 auto; }
+.posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+.post-card { background: white; border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: all 0.3s; }
+.post-card:hover { border-color: var(--blue); box-shadow: 0 12px 40px rgba(14,80,160,0.1); transform: translateY(-4px); }
+.post-img { height: 200px; overflow: hidden; }
+.post-img-ph { width: 100%; height: 100%; background: linear-gradient(135deg, #c8d8f0, #8aaedc); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; }
+.post-body { padding: 1.5rem; }
+.post-cat { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.6rem; display: block; }
+.post-body h3 { font-size: 0.95rem; font-weight: 700; color: var(--text); line-height: 1.45; margin-bottom: 1.25rem; }
+.post-read { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); text-decoration: none; border: 1.5px solid var(--gray-200); padding: 8px 16px; border-radius: 4px; transition: all 0.2s; }
+.post-read:hover { border-color: var(--blue); background: var(--blue); color: white; }
+.post-read::after { content: '›'; font-size: 1rem; }
+.hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 2; }
+.hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.75rem; display: flex; align-items: center; gap: 12px; }
+.hero-eyebrow::before { content: ''; width: 28px; height: 2px; background: var(--orange); }
+.hero h1 { font-size: clamp(2.5rem, 4.5vw, 3.8rem); font-weight: 300; line-height: 1.15; letter-spacing: -0.03em; color: white; margin-bottom: 1.5rem; }
+.hero h1 strong { font-weight: 700; display: block; }
+.hero-p { font-size: 0.98rem; color: rgba(255,255,255,0.55); line-height: 1.85; max-width: 460px; margin-bottom: 2.5rem; }
+.hero-btns { display: flex; gap: 1rem; margin-bottom: 4rem; }
+.btn-white { background: white; color: var(--blue); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 30px; border-radius: 4px; text-decoration: none; transition: all 0.25s; display: inline-block; }
+.btn-white:hover { background: var(--gray-100); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.btn-ghost { color: rgba(255,255,255,0.6); font-size: 0.8rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s, gap 0.2s; padding: 14px 0; }
+.btn-ghost:hover { color: white; gap: 10px; }
+.hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.06); }
+.hero-stat { padding: 1.5rem; background: rgba(255,255,255,0.03); text-align: center; }
+.hero-stat .n { font-size: 1.8rem; font-weight: 700; color: white; letter-spacing: -0.03em; display: block; line-height: 1; margin-bottom: 4px; }
+.hero-stat .l { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.hero-right { display: flex; flex-direction: column; gap: 1.5rem; }
+.hero-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 2rem; transition: border-color 0.3s; }
+.hero-card:hover { border-color: rgba(242,96,32,0.4); }
+.hero-card-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.hero-card-icon { width: 40px; height: 40px; background: var(--orange); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.hero-card-top h4 { font-size: 0.95rem; font-weight: 700; color: white; }
+.hero-card p { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.7; margin: 0; }
+
+/* DIVIDER SECTION */
+.orange-strip { background: var(--orange); padding: 28px 72px; display: flex; align-items: center; justify-content: space-between; }
+.orange-strip p { font-size: 1.05rem; font-weight: 600; color: white; }
+.orange-strip a { background: white; color: var(--orange); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 28px; border-radius: 4px; text-decoration: none; white-space: nowrap; }
+
+/* SECTIONS SHARED */
+.section { padding: 100px 72px; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; display: block; }
+.sh { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 300; letter-spacing: -0.03em; color: var(--text); margin-bottom: 1rem; }
+.sh strong { font-weight: 700; }
+.sp { font-size: 0.92rem; color: var(--gray-500); line-height: 1.85; max-width: 500px; margin-bottom: 3rem; }
+
+/* PRODUCTS */
+.products { background: var(--blue-deep); }
+.products .sh { color: white; }
+.products .sp { color: rgba(255,255,255,0.45); }
+.products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,0.06); }
+.product-item { background: var(--blue-deep); padding: 2.5rem 2rem; transition: background 0.3s; position: relative; border-bottom: 3px solid transparent; }
+.product-item:hover { background: rgba(255,255,255,0.04); border-bottom-color: var(--orange); }
+.p-num { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; color: rgba(255,255,255,0.2); margin-bottom: 1.5rem; display: block; }
+.product-item h3 { font-size: 1rem; font-weight: 700; color: white; margin-bottom: 0.75rem; line-height: 1.3; }
+.product-item p { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 1.5rem; }
+.p-link { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); text-decoration: none; }
+
+/* SERVICES */
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.svc-card { border: 1px solid var(--gray-200); border-radius: 8px; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden; }
+.svc-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--orange); transition: height 0.3s; }
+.svc-card:hover { border-color: var(--gray-200); box-shadow: 0 12px 40px rgba(14,80,160,0.08); transform: translateY(-3px); }
+.svc-card:hover::before { height: 100%; }
+.svc-num { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; color: var(--gray-500); margin-bottom: 1.25rem; display: block; }
+.svc-card h3 { font-size: 0.98rem; font-weight: 700; color: var(--blue); margin-bottom: 0.6rem; }
+.svc-card p { font-size: 0.82rem; color: var(--gray-500); line-height: 1.7; margin-bottom: 1.25rem; }
+.svc-link { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: color 0.2s, gap 0.2s; }
+.svc-link:hover { color: var(--orange); gap: 9px; }
+
+/* STATS BAR */
+.stats-row { background: var(--blue); display: grid; grid-template-columns: repeat(4, 1fr); }
+.stats-row-item { padding: 3rem 2rem; text-align: center; border-right: 1px solid rgba(255,255,255,0.08); }
+.stats-row-item:last-child { border-right: none; }
+.stats-row-item .n { font-size: 2.8rem; font-weight: 300; color: white; letter-spacing: -0.04em; display: block; line-height: 1; margin-bottom: 6px; }
+.stats-row-item .n strong { font-weight: 700; }
+.stats-row-item .l { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+
+/* WHY */
+.why-layout { display: grid; grid-template-columns: 400px 1fr; gap: 80px; align-items: start; }
+.why-left { position: sticky; top: 100px; }
+.why-left .sh { color: var(--text); }
+.why-left p { font-size: 0.9rem; color: var(--gray-500); line-height: 1.85; margin-bottom: 2rem; }
+.why-list { display: flex; flex-direction: column; gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); }
+.why-item { background: white; display: flex; gap: 1.5rem; padding: 1.75rem 2rem; transition: background 0.2s; border-left: 3px solid transparent; }
+.why-item:hover { background: var(--gray-100); border-left-color: var(--orange); }
+.why-item-num { font-size: 1.5rem; font-weight: 700; color: var(--gray-200); flex-shrink: 0; line-height: 1; }
+.why-item-text h4 { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+.why-item-text p { font-size: 0.82rem; color: var(--gray-500); line-height: 1.7; margin: 0; }
+
+/* CTA */
+.cta { background: var(--blue-deep); padding: 100px 72px; }
+.cta-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.cta-inner .sh { color: white; }
+.cta-left > p { color: rgba(255,255,255,0.5); font-size: 0.92rem; line-height: 1.85; margin-bottom: 2rem; }
+.pain { list-style: none; margin-bottom: 2.5rem; }
+.pain li { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.85rem; color: rgba(255,255,255,0.6); display: flex; gap: 10px; align-items: flex-start; }
+.pain li::before { content: '→'; color: var(--orange); flex-shrink: 0; font-weight: 700; }
+.cta-box { background: white; border-radius: 8px; padding: 2.5rem; }
+.cta-box h3 { font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+.cta-box .sub { font-size: 0.8rem; color: var(--gray-500); margin-bottom: 1.75rem; }
+.fg { margin-bottom: 1rem; }
+.fg input, .fg select { width: 100%; padding: 11px 14px; border: 1.5px solid var(--gray-200); border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 0.85rem; color: var(--text); transition: border-color 0.2s; }
+.fg input:focus, .fg select:focus { outline: none; border-color: var(--blue); }
+.fgrow { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.btn-sub { width: 100%; background: var(--orange); color: white; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px; border: none; border-radius: 4px; cursor: pointer; margin-top: 0.5rem; transition: background 0.2s; }
+.btn-sub:hover { background: var(--orange-dk); }
+
+/* FOOTER */
+footer { background: #050F20; padding: 80px 72px 40px; }
+.fi { max-width: 1200px; margin: 0 auto; }
+.ft { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 4rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.fb-logo img { height: 44px; filter: brightness(0) invert(1); opacity: 0.7; margin-bottom: 1.25rem; }
+.fb p { color: rgba(255,255,255,0.38); font-size: 0.8rem; line-height: 1.8; margin-bottom: 1rem; }
+.fb-phone { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.5); }
+.fc h5 { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 1.5rem; }
+.fc a { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.48); text-decoration: none; font-size: 0.8rem; margin-bottom: 0.55rem; transition: color 0.2s; }
+.fc a::before { content: '›'; color: var(--orange); font-size: 0.9rem; }
+.fc a:hover { color: rgba(255,255,255,0.85); }
+.fbot { display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+.fbot p { font-size: 0.7rem; color: rgba(255,255,255,0.22); }
+.fbot-links { display: flex; gap: 2rem; }
+.fbot-links a { font-size: 0.7rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+.fbot-links a:hover { color: rgba(255,255,255,0.6); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><img src="../brand_assets/survival-systems-international-logo-2.gif" alt="Survival Systems International"></div>
+  <ul class="nav-center">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">Shop</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-phone">T: +44 (0)1493 659 411</div>
+    <a href="#" class="btn-nav">Get In Touch</a>
+  </div>
+</nav>
+
+<!-- VIDEO MODAL -->
+<div class="modal" id="videoModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕ CLOSE</button>
+    <video id="modalVideo" controls>
+      <source src="../brand_assets/Survival-Systems-International-UK_Media_I5vTDtD3gF0_001_1080p.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
+
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="../brand_assets/Survival-Systems-International-UK_Media_I5vTDtD3gF0_001_1080p.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner" style="position:relative;z-index:2">
+    <div>
+      <div class="hero-eyebrow">UK's Most Trusted Lifeboat Partner</div>
+      <h1>Keeping Lifeboats<br><strong>Operational, Safe<br>& Compliant</strong></h1>
+      <p class="hero-p">Over 50 years of specialist lifeboat inspection, maintenance and repair — through a global network of owned and operated service bases.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn-white">Request a Survey</a>
+        <a href="#" class="btn-ghost">View Services →</a>
+        <button class="btn-watch" onclick="openModal()">
+          <div class="btn-watch-icon"></div>Watch Our Story
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="n">50+</span><span class="l">Years</span></div>
+        <div class="hero-stat"><span class="n">1,000+</span><span class="l">Vessels</span></div>
+        <div class="hero-stat"><span class="n">ISO</span><span class="l">Certified</span></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hero-card-top">
+          <div class="hero-card-icon">⚓</div>
+          <h4>50+ Years of Expertise</h4>
+        </div>
+        <p>The safest lifeboat track record in the life saving industry with over 50 years of 100% focus on lifeboat systems and compliance.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-top">
+          <div class="hero-card-icon">🔒</div>
+          <h4>Patented Triple5LX Hook</h4>
+        </div>
+        <p>Inherently safe by design — our patented hook cannot accidentally release under load. The industry's safest hook, certified worldwide.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-top">
+          <div class="hero-card-icon">✅</div>
+          <h4>IMO MSC.402(96) Compliant</h4>
+        </div>
+        <p>Fully certified to the latest international standards. We plan, manage, and remind — so your fleet stays compliant without the headache.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="orange-strip">
+  <p>Since IMO MSC.402(96), you are no longer obliged to use OEM agents — SSI provides a fully compliant alternative.</p>
+  <a href="#">Learn More →</a>
+</div>
+
+<section class="section products">
+  <div class="section-inner">
+    <span class="eyebrow">Lifeboat Products</span>
+    <h2 class="sh" style="color:white">Engineered for <strong style="color:white">the Harshest Conditions</strong></h2>
+    <p class="sp">Original designers of the Single Fall Lifeboat Capsule — manufacturing lifeboat products for over 50 years.</p>
+    <div class="products-grid">
+      <div class="product-item">
+        <span class="p-num">01</span>
+        <h3>Single Fall Lifeboat Capsules</h3>
+        <p>The most robust single fall lifeboat solution in the industry — designed and manufactured by SSI.</p>
+        <a href="#" class="p-link">Learn More →</a>
+      </div>
+      <div class="product-item">
+        <span class="p-num">02</span>
+        <h3>Twinfall Lifeboats</h3>
+        <p>Twin-fall solutions for vessels requiring the highest standards of safety and operational reliability.</p>
+        <a href="#" class="p-link">Learn More →</a>
+      </div>
+      <div class="product-item">
+        <span class="p-num">03</span>
+        <h3>Triple5LX Lifeboat Hooks</h3>
+        <p>Our patented hook — the safest in the industry. Certified to the latest international safety standards.</p>
+        <a href="#" class="p-link">Learn More →</a>
+      </div>
+      <div class="product-item">
+        <span class="p-num">04</span>
+        <h3>Enhanced Safety Kits</h3>
+        <p>Retrofit safety kits to bring ageing lifeboat systems up to current compliance requirements.</p>
+        <a href="#" class="p-link">Learn More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <span class="eyebrow">Lifeboat Services</span>
+    <h2 class="sh">Complete <strong>Lifecycle Support</strong></h2>
+    <p class="sp">From routine inspection to full refurbishment — everything your fleet needs to stay compliant and operational.</p>
+    <div class="services-grid">
+      <div class="svc-card">
+        <span class="svc-num">01</span>
+        <h3>Maintenance & Inspection</h3>
+        <p>Regular lifeboat inspections ensuring your equipment stays in a constant state of readiness.</p>
+        <a href="#" class="svc-link">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <span class="svc-num">02</span>
+        <h3>Repairs & Refurbishments</h3>
+        <p>Extend the field life of your fleet with comprehensive repair and refurbishment programmes.</p>
+        <a href="#" class="svc-link">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <span class="svc-num">03</span>
+        <h3>Load Testing</h3>
+        <p>Lifeboat and davit tests from 75kg up to 110% surveys — designed for reliability and safety.</p>
+        <a href="#" class="svc-link">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <span class="svc-num">04</span>
+        <h3>Hire Equipment</h3>
+        <p>Full range of hire for lifeboats, winches and load testing equipment for all vessel needs.</p>
+        <a href="#" class="svc-link">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <span class="svc-num">05</span>
+        <h3>Pond Testing</h3>
+        <p>Full in-water testing of lifeboats and rescue craft to international safety regulations.</p>
+        <a href="#" class="svc-link">Learn More →</a>
+      </div>
+      <div class="svc-card">
+        <span class="svc-num">06</span>
+        <h3>Life Raft Recertification</h3>
+        <p>Comprehensive life raft servicing and recertification to keep emergency equipment ready.</p>
+        <a href="#" class="svc-link">Learn More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-row">
+  <div class="stats-row-item"><span class="n"><strong>50+</strong></span><span class="l">Years Experience</span></div>
+  <div class="stats-row-item"><span class="n"><strong>1,000+</strong></span><span class="l">Vessels Serviced</span></div>
+  <div class="stats-row-item"><span class="n"><strong>Global</strong></span><span class="l">Service Network</span></div>
+  <div class="stats-row-item"><span class="n"><strong>100%</strong></span><span class="l">Compliance Focus</span></div>
+</div>
+
+<section class="section">
+  <div class="section-inner">
+    <span class="eyebrow">Why Choose SSI</span>
+    <div class="why-layout">
+      <div class="why-left">
+        <h2 class="sh">The Standard <strong>Others Are<br>Measured Against</strong></h2>
+        <p>Since 1970, our singular focus has been lifeboat systems. Every product, every engineer — optimised for one thing: keeping your crew safe.</p>
+        <a href="#" class="btn-nav" style="display:inline-block;margin-top:0.5rem">Work With SSI</a>
+      </div>
+      <div class="why-list">
+        <div class="why-item">
+          <div class="why-item-num">01</div>
+          <div class="why-item-text"><h4>50+ Years Experience</h4><p>The safest lifeboat track record in the life saving industry, with 100% focus on lifeboat systems since 1970.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-num">02</div>
+          <div class="why-item-text"><h4>Worldwide Service Network</h4><p>SSI can manage your entire lifeboat fleet worldwide — from inspections and repairs to full training programmes.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-num">03</div>
+          <div class="why-item-text"><h4>Lower Operational Costs</h4><p>SSI lifeboats offer the longest lifespan with significantly reduced maintenance needs and lower operational costs.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-num">04</div>
+          <div class="why-item-text"><h4>Patented Triple5LX Hook</h4><p>The Triple5LX hook is the safest in the industry — inherently safe by design, certified to international standards.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-num">05</div>
+          <div class="why-item-text"><h4>ISO Compliant</h4><p>We lead the development of international ISO safety standards for lifeboat servicing and training worldwide.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECENT POSTS -->
+<section class="posts">
+  <div class="posts-inner">
+    <span class="eyebrow">Latest Updates</span>
+    <h2 class="sh"><strong>Recent Posts</strong></h2>
+    <div style="width:48px;height:3px;background:var(--blue);border-radius:2px;margin:0.75rem 0 1rem"></div>
+    <p class="sp">Our recent posts share the latest updates from SSI, including new projects, technical developments, and industry insights. Stay up to date with what's happening across our global operations.</p>
+    <div class="posts-grid">
+      <div class="post-card">
+        <div class="post-img"><div class="post-img-ph">[ FPSO Image ]</div></div>
+        <div class="post-body">
+          <span class="post-cat">Case Study</span>
+          <h3>Case Study: Increasing Lifeboat Capacity on FPSO Fleet</h3>
+          <a href="#" class="post-read">Read More</a>
+        </div>
+      </div>
+      <div class="post-card">
+        <div class="post-img"><div class="post-img-ph">[ Offshore Image ]</div></div>
+        <div class="post-body">
+          <span class="post-cat">Compliance</span>
+          <h3>Are Your Lifeboats Still Certified for Today's Offshore Workforce?</h3>
+          <a href="#" class="post-read">Read More</a>
+        </div>
+      </div>
+      <div class="post-card">
+        <div class="post-img"><div class="post-img-ph">[ FPSO Capsule ]</div></div>
+        <div class="post-body">
+          <span class="post-cat">Product</span>
+          <h3>FPSO Capsule Solution for Increased POB</h3>
+          <a href="#" class="post-read">Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="cta-inner">
+    <div class="cta-left">
+      <span class="eyebrow" style="color:rgba(255,255,255,0.4)">Get In Touch</span>
+      <h2 class="sh" style="color:white;margin-bottom:1rem">Is Your Fleet <strong style="color:white">Inspection-Ready?</strong></h2>
+      <p>Non-compliance, downtime, and vessel detention are risks no fleet operator can afford. Talk to SSI today.</p>
+      <ul class="pain">
+        <li>Operational costs too high?</li>
+        <li>Hooks putting you at risk of non-compliance?</li>
+        <li>Concerns about lifeboat compliance?</li>
+        <li>At risk of dawn-manning or vessel detention?</li>
+      </ul>
+      <a href="#" class="btn-white" style="color:var(--blue)">Contact Us Today</a>
+    </div>
+    <div class="cta-box">
+      <h3>Request a Free Survey</h3>
+      <p class="sub">We'll reply within 48 hours with full details.</p>
+      <div class="fgrow">
+        <div class="fg"><input type="text" placeholder="First Name"></div>
+        <div class="fg"><input type="text" placeholder="Last Name"></div>
+      </div>
+      <div class="fg"><input type="email" placeholder="Work Email"></div>
+      <div class="fg"><input type="text" placeholder="Company / Vessel Name"></div>
+      <div class="fg">
+        <select>
+          <option>Your Role</option>
+          <option>Technical Superintendent</option>
+          <option>Fleet Manager</option>
+          <option>HSE Manager</option>
+          <option>Operations Manager</option>
+          <option>Procurement Manager</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <button class="btn-sub">Submit Request →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div class="ft">
+      <div class="fb">
+        <div class="fb-logo"><img src="../brand_assets/survival-systems-international-logo-2.gif" alt="SSI"></div>
+        <p>The UK's most trusted lifeboat inspection and maintenance partner. Keeping crews safe since 1970.</p>
+        <div class="fb-phone">T: +44 (0) 1493 659411</div>
+      </div>
+      <div class="fc">
+        <h5>Lifeboat Products</h5>
+        <a href="#">Single Fall Lifeboat Capsules</a>
+        <a href="#">Twinfall Lifeboats</a>
+        <a href="#">Triple5LX Lifeboat Hooks</a>
+        <a href="#">Enhanced Safety Kits</a>
+        <a href="#">Life Rafts</a>
+        <a href="#">Jason's Cradle ®</a>
+        <a href="#">Online Store</a>
+      </div>
+      <div class="fc">
+        <h5>Lifeboat Services</h5>
+        <a href="#">Maintenance & Inspection</a>
+        <a href="#">Repairs & Refurbishments</a>
+        <a href="#">Load Testing</a>
+        <a href="#">Hire Equipment</a>
+        <a href="#">Pond Testing</a>
+        <a href="#">Dangerous Goods Services</a>
+        <a href="#">Life Raft Recertification</a>
+      </div>
+      <div class="fc">
+        <h5>Company Info</h5>
+        <a href="#">About</a>
+        <a href="#">Events</a>
+        <a href="#">Careers</a>
+        <a href="#">Blog</a>
+        <h5 style="margin-top:1.5rem">Support</h5>
+        <a href="#">Training</a>
+        <a href="#">Regulations</a>
+        <a href="#">Accreditations</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="fbot">
+      <p>© Survival Systems International, Inc. | T: +44 (0) 1493 659411</p>
+      <div class="fbot-links"><a href="#">Global</a><a href="#">Career</a><a href="#">Contact</a></div>
+    </div>
+  </div>
+</footer>
+<script>
+function openModal(){
+  document.getElementById('videoModal').classList.add('open');
+  document.getElementById('modalVideo').play();
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('videoModal').classList.remove('open');
+  document.getElementById('modalVideo').pause();
+  document.getElementById('modalVideo').currentTime=0;
+  document.body.style.overflow='';
+}
+document.getElementById('videoModal').addEventListener('click',function(e){ if(e.target===this) closeModal(); });
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>
