@@ -130,6 +130,35 @@ nav{background:var(--white);border-bottom:1px solid var(--gray-200);padding:0 72
 .btn-sub{width:100%;background:var(--orange);color:white;font-family:'Inter',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:14px;border:none;border-radius:4px;cursor:pointer;margin-top:0.5rem;transition:background 0.2s}
 .btn-sub:hover{background:var(--orange-dk)}
 
+/* HERO VIDEO */
+.hero-video-wrap{flex:1;position:relative;min-height:300px;overflow:hidden;background:var(--blue-deep)}
+.hero-video-wrap video{width:100%;height:100%;object-fit:cover;display:block}
+
+/* WATCH BUTTON */
+.btn-watch-glass{background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.85);font-size:0.78rem;font-weight:600;letter-spacing:0.06em;padding:13px 24px;border-radius:40px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.25s}
+.btn-watch-glass:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.45);color:white}
+
+/* VIDEO MODAL */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:9999;align-items:center;justify-content:center}
+.modal.open{display:flex}
+.modal-inner{position:relative;width:90%;max-width:900px}
+.modal-inner video{width:100%;border-radius:8px;display:block}
+.modal-close{position:absolute;top:-44px;right:0;background:none;border:none;color:white;font-size:2rem;cursor:pointer;line-height:1;opacity:0.7;transition:opacity 0.2s}
+.modal-close:hover{opacity:1}
+
+/* RECENT POSTS */
+.posts{padding:100px 80px;background:var(--cream)}
+.posts .si{max-width:1200px;margin:0 auto}
+.posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.post-card{background:white;border:1px solid var(--gray-200);border-radius:6px;overflow:hidden;transition:all 0.3s}
+.post-card:hover{border-color:var(--blue);box-shadow:0 8px 32px rgba(14,80,160,0.08);transform:translateY(-3px)}
+.post-img{height:180px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--gray-500);letter-spacing:0.1em}
+.post-body{padding:1.5rem}
+.post-cat{font-size:0.62rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);margin-bottom:0.5rem;display:block}
+.post-body h3{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:0.75rem;line-height:1.4}
+.post-body p{font-size:0.8rem;color:var(--gray-500);line-height:1.65;margin-bottom:1rem}
+.post-read{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);text-decoration:none}
+
 /* FOOTER */
 footer{background:#050F20;padding:80px 80px 40px}
 .fi{max-width:1200px;margin:0 auto}
@@ -149,6 +178,15 @@ footer{background:#050F20;padding:80px 80px 40px}
 </style>
 </head>
 <body>
+
+<div class="modal" id="videoModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <video id="modalVideo" controls>
+      <source src="../brand_assets/Survival-Systems-International-UK_Media_I5vTDtD3gF0_001_1080p.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
 
 <nav>
   <div class="logo"><img src="../brand_assets/survival-systems-international-logo-2.gif" alt="Survival Systems International"></div>
@@ -175,6 +213,7 @@ footer{background:#050F20;padding:80px 80px 40px}
       <div class="hero-btns">
         <a href="#" class="btn-white">Request a Survey</a>
         <a href="#" class="btn-outline-w">View Our Services</a>
+        <a href="#" onclick="openModal();return false;" class="btn-watch-glass">▶&nbsp; Watch Our Story</a>
       </div>
       <div class="hero-creds">
         <div class="hcred"><span class="n">50+</span><span class="l">Years</span></div>
@@ -185,7 +224,11 @@ footer{background:#050F20;padding:80px 80px 40px}
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-img">[ Hero Image — Lifeboat at Sea ]</div>
+    <div class="hero-video-wrap">
+      <video autoplay muted loop playsinline>
+        <source src="../brand_assets/Survival-Systems-International-UK_Media_I5vTDtD3gF0_001_1080p.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="hero-cards">
       <div class="hcard">
         <div class="hcard-icon">⚓</div>
@@ -325,6 +368,43 @@ footer{background:#050F20;padding:80px 80px 40px}
   </div>
 </section>
 
+<!-- RECENT POSTS -->
+<section class="posts">
+  <div class="si">
+    <span class="ey">From Our Blog</span>
+    <h2 class="sh">Latest <strong>from SSI</strong></h2>
+    <div class="posts-grid">
+      <div class="post-card">
+        <div class="post-img">[ Blog Image ]</div>
+        <div class="post-body">
+          <span class="post-cat">Case Study</span>
+          <h3>Increasing Lifeboat Capacity on FPSO Fleet</h3>
+          <p>How SSI helped a major operator increase single fall lifeboat capacity across their FPSO fleet.</p>
+          <a href="#" class="post-read">Read More ></a>
+        </div>
+      </div>
+      <div class="post-card">
+        <div class="post-img">[ Blog Image ]</div>
+        <div class="post-body">
+          <span class="post-cat">Compliance</span>
+          <h3>Are Your Lifeboats Certified for Today's Offshore Workforce?</h3>
+          <p>Understanding IMO MSC.402(96) and what it means for your fleet compliance in 2025.</p>
+          <a href="#" class="post-read">Read More ></a>
+        </div>
+      </div>
+      <div class="post-card">
+        <div class="post-img">[ Blog Image ]</div>
+        <div class="post-body">
+          <span class="post-cat">Product</span>
+          <h3>FPSO Capsule Solution for Increased POB</h3>
+          <p>SSI's Single Fall Capsule solution for FPSO vessels requiring increased persons on board capacity.</p>
+          <a href="#" class="post-read">Read More ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta">
   <div class="cta-grid">
@@ -386,5 +466,17 @@ footer{background:#050F20;padding:80px 80px 40px}
     </div>
   </div>
 </footer>
+<script>
+function openModal(){
+  document.getElementById('videoModal').classList.add('open');
+  document.getElementById('modalVideo').play();
+}
+function closeModal(){
+  document.getElementById('videoModal').classList.remove('open');
+  var v=document.getElementById('modalVideo');
+  v.pause();v.currentTime=0;
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
+</script>
 </body>
 </html>

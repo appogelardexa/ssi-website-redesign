@@ -139,6 +139,23 @@ nav{background:var(--white);border-bottom:1px solid var(--g200);padding:0 72px;d
 .btn-sub{width:100%;background:var(--orange);color:white;font-family:'Inter',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:14px;border:none;border-radius:4px;cursor:pointer;margin-top:0.5rem;transition:background 0.2s}
 .btn-sub:hover{background:var(--orange-dk)}
 
+/* HERO VIDEO IMAGE */
+.hi-video{position:relative;overflow:hidden;padding:0}
+.hi-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hi-video .hi-label{position:absolute;bottom:16px;left:16px;z-index:2}
+
+/* WATCH BUTTON */
+.btn-watch-dark{border:1.5px solid var(--text);color:var(--text);font-size:0.78rem;font-weight:600;letter-spacing:0.06em;padding:12px 22px;border-radius:40px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.25s}
+.btn-watch-dark:hover{background:var(--text);color:white}
+
+/* VIDEO MODAL */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:9999;align-items:center;justify-content:center}
+.modal.open{display:flex}
+.modal-inner{position:relative;width:90%;max-width:900px}
+.modal-inner video{width:100%;border-radius:8px;display:block}
+.modal-close{position:absolute;top:-44px;right:0;background:none;border:none;color:white;font-size:2rem;cursor:pointer;line-height:1;opacity:0.7;transition:opacity 0.2s}
+.modal-close:hover{opacity:1}
+
 /* FOOTER */
 footer{background:#050F20;padding:80px 72px 40px}
 .fi{max-width:1200px;margin:0 auto}
@@ -158,6 +175,15 @@ footer{background:#050F20;padding:80px 72px 40px}
 </style>
 </head>
 <body>
+
+<div class="modal" id="videoModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <video id="modalVideo" controls>
+      <source src="../brand_assets/Survival-Systems-International-UK_Media_I5vTDtD3gF0_001_1080p.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
 
 <nav>
   <div class="logo"><img src="../brand_assets/survival-systems-international-logo-2.gif" alt="Survival Systems International"></div>
@@ -186,11 +212,17 @@ footer{background:#050F20;padding:80px 72px 40px}
       <div class="hero-btns">
         <a href="#" class="btn-p">Request a Survey</a>
         <a href="#" class="btn-s">View Services →</a>
+        <a href="#" onclick="openModal();return false;" class="btn-watch-dark">▶&nbsp; Watch Our Story</a>
       </div>
     </div>
   </div>
   <div class="hero-imgs">
-    <div class="hi">[ Main Hero Image — Lifeboat at Sea ]<div class="hi-label">50+ Years of Excellence</div></div>
+    <div class="hi hi-video">
+      <video autoplay muted loop playsinline>
+        <source src="../brand_assets/Survival-Systems-International-UK_Media_I5vTDtD3gF0_001_1080p.mp4" type="video/mp4">
+      </video>
+      <div class="hi-label">50+ Years of Excellence</div>
+    </div>
     <div class="hi">[ Triple5LX Hook ]<span class="hi-tag">Patented</span></div>
     <div class="hi">[ Service Team ]</div>
   </div>
@@ -369,5 +401,17 @@ footer{background:#050F20;padding:80px 72px 40px}
     </div>
   </div>
 </footer>
+<script>
+function openModal(){
+  document.getElementById('videoModal').classList.add('open');
+  document.getElementById('modalVideo').play();
+}
+function closeModal(){
+  document.getElementById('videoModal').classList.remove('open');
+  var v=document.getElementById('modalVideo');
+  v.pause();v.currentTime=0;
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
+</script>
 </body>
 </html>
